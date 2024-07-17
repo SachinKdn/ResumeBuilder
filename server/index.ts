@@ -31,7 +31,7 @@ app.use(morgan("dev"));
 const PORT = process.env.PORT || 4000;
 
 const initApp = async (): Promise<void> => {
-    //connecting with DB
+    //connecting with DB.
     await initDB();
 
     // passport init
