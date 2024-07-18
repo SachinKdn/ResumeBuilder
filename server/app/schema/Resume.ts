@@ -53,6 +53,7 @@ interface Address {
   }
   
   export interface IResume {
+    isLightTheme: boolean;
     title: string;
     username: string;
     useremail: string;
@@ -149,6 +150,7 @@ const SocialMediaSchema = new Schema({
 
 // User Schema
 const ResumeSchema = new Schema({
+    isLightTheme: {type: Boolean, default: true},
     title: { type: String, required: true },
     username: { type: String, required: true },
     useremail: { type: String, required: true},

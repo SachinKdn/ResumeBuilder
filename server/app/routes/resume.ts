@@ -16,8 +16,22 @@ import Resume, { IResume } from "../schema/Resume";
 
 const router = express.Router();
 
+router.get("/getResume/:id",
+  passport.authenticate("jwt", { session: false }),
+  expressAsyncHandler(async (req, res) => {
+    const id = req.params.id;
+    const resume = await Resume.findById(id);
+    if(!resume){
+      res.status(404).send({msg:"Resume Not Found Sir."})
+      return;
+    }
+    console.log("Resume Fetched....")
+    res.send({resume, msg:"Resume fetched successfully."})
+})
+)
 router.post(
     "/create",
+    passport.authenticate("jwt", { session: false }),
     // validate("users:create"),
 //   catchError,
     expressAsyncHandler(async (req, res) => {
@@ -32,6 +46,7 @@ router.post(
 
   router.put(
     "/update/:id",
+    passport.authenticate("jwt", { session: false }),
     expressAsyncHandler(async(req,res) => {
         const updates : Partial<IResume> = req.body;
     // const newResume = await Resume.findByIdAndUpdate(req.params.id, updates, { new: true });
