@@ -20,6 +20,7 @@ interface Address {
     startDate: Date;
     endDate: Date;
     responsibilities: string[];
+    skills: string[];
   }
   
   interface Project {
@@ -86,12 +87,13 @@ const EducationSchema = new Schema<Education>({
   });
 
 // Experience Schema
-const ExperienceSchema = new Schema({
+const ExperienceSchema = new Schema<Experience>({
     company: { type: String, required: true },
     role: { type: String, required: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
-    responsibilities: [{ type: String, required: true }]
+    responsibilities: [{ type: String, required: true }],
+    skills: [{ type: String, required: true }]
   });
 
   // Project Schema
@@ -149,7 +151,7 @@ const SocialMediaSchema = new Schema({
   });
 
 // User Schema
-const ResumeSchema = new Schema({
+const ResumeSchema = new Schema<IResume>({
     isLightTheme: {type: Boolean, default: true},
     title: { type: String, required: true },
     username: { type: String, required: true },

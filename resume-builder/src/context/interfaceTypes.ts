@@ -10,22 +10,23 @@ interface Address {
     endDate: Date;
   }
   
-  interface Experience {
+  export interface Experience {
     company: string;
     role: string;
     startDate: Date;
     endDate: Date;
     responsibilities: string[];
+    skills: string[];
   }
   
-  interface Project {
+  export interface Project {
     name: string;
     description: string;
     technologies: string[];
     link: string;
   }
   
-  interface SkillSection {
+  export interface SkillSection {
     sectionName: string;
   subCategories: {
     categoryName: string;
