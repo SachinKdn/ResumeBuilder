@@ -16,6 +16,42 @@ export interface ICreateResume{
     username:string,
     useremail:string
 }
+export interface ILoginUser{
+  email:string,
+  password:string
+}
+export interface IUser {
+  name: string;
+  email: string;
+  password: string;
+}
+export interface UserResponse{
+  accessToken: string;
+  refreshToken: string;
+  user: {
+    name: string;
+  email: string;
+  password: string;
+  _id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  };
+}
+export const login = async (loginData : ILoginUser) : Promise<UserResponse> => {
+  const response = await axiosInstance.post('/users/login', loginData);
+  const data: UserResponse = response.data.data;
+  console.log(data)
+
+    return data;
+  // return response.data.data;
+};
+export const register = async (userData : IUser) => {
+  const response = await axiosInstance.post('/users/register', userData);
+  const data: UserResponse = response.data.data;
+  console.log(data)
+
+    return data;
+};
 export const createResume = async (resumeData : ICreateResume) => {
   const response = await axiosInstance.post('/resume/create', resumeData);
   return response.data;

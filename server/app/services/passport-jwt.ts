@@ -17,7 +17,7 @@ const isValidPassword = async function (value: string, password: string) {
     passport.use(
       new Strategy(
         {
-          secretOrKey: process.env.JWT_SECRET || "TOP_SECRET",
+          secretOrKey: process.env.JWT_SECRET || "SECRET_KEY",
           jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
         },
         async (token, done) => {
@@ -69,7 +69,7 @@ const isValidPassword = async function (value: string, password: string) {
 
 export const createUserTokens = (user: Omit<IUser, "password">) => {
     console.log(user);
-     const jwtSecret = process.env.JWT_SECRET ?? "";
+     const jwtSecret = process.env.JWT_SECRET ?? "SECRET_KEY";
      const token = jwt.sign(user, jwtSecret);
      console.log("Token created successfully");
      return { accessToken: token, refreshToken: "" };
@@ -77,7 +77,7 @@ export const createUserTokens = (user: Omit<IUser, "password">) => {
 
 
   export const decodeToken = (token: string): IUser => {
-    const jwtSecret = process.env.JWT_SECRET || "";
+    const jwtSecret = process.env.JWT_SECRET || "SECRET_KEY";
     if (!jwtSecret) {
       throw new Error("JWT_SECRET is not defined");
     }
