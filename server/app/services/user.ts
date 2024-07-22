@@ -19,6 +19,7 @@ export const createUser = async (data: {
   export const getUserByEmail = async (email: string) => {
     console.log("finding user by mail")
     const user = await User.findOne({ email: email }).lean();//This method returns a plain JavaScript object instead of a Mongoose document, which can be useful for querying and returning data in a more lightweight and efficient manner.
+    console.log(user)
     return user;
   };
   export const hashPassword = async (password: string) => {

@@ -41,7 +41,7 @@ const PersonalDetailPreview: React.FC<IProp> = ({ resumeInfo }) => {
             component="h2"
             sx={{
               fontFamily: "Poppins",
-              fontSize: "28px",
+              fontSize: "38px", //28
               lineHeight: "35.28px",
               fontWeight: "800",
               color: "#334155",
@@ -54,7 +54,7 @@ const PersonalDetailPreview: React.FC<IProp> = ({ resumeInfo }) => {
             component="h4"
             sx={{
               fontFamily: "Poppins",
-              fontSize: "14px",
+              fontSize: "20px", //14
               lineHeight: "12.6px",
               fontWeight: "500",
               color: "#64748B",
@@ -78,7 +78,7 @@ const PersonalDetailPreview: React.FC<IProp> = ({ resumeInfo }) => {
           <Box
             sx={{
               display: "flex",
-              height: "22px",
+              height: "32px", //22
               gap: "3",
             }}
           >
@@ -99,7 +99,7 @@ const PersonalDetailPreview: React.FC<IProp> = ({ resumeInfo }) => {
                 component="span"
                 sx={{
                   fontFamily: "Poppins",
-                  fontSize: "12px",
+                  fontSize: "18px", //12
                   // lineHeight: "11px",
                   fontWeight: "400",
                   color: "#334155",
@@ -125,7 +125,7 @@ const PersonalDetailPreview: React.FC<IProp> = ({ resumeInfo }) => {
                 component="span"
                 sx={{
                   fontFamily: "Poppins",
-                  fontSize: "12px",
+                  fontSize: "18px", //12
                   // lineHeight: "11px",
                   fontWeight: "400",
                   color: "#334155",
@@ -151,7 +151,7 @@ const PersonalDetailPreview: React.FC<IProp> = ({ resumeInfo }) => {
                 component="span"
                 sx={{
                   fontFamily: "Poppins",
-                  fontSize: "12px",
+                  fontSize: "18px", //12
                   // lineHeight: "11px",
                   fontWeight: "400",
                   color: "#334155",
@@ -164,75 +164,159 @@ const PersonalDetailPreview: React.FC<IProp> = ({ resumeInfo }) => {
           <Box
             sx={{
               display: "flex",
-              height: "30px",
+              height: "38px", //30
               gap: "3",
               justifyContent: "space-evenly",
               alignItems: "center",
             }}
           >
-            <Button
-              variant="text"
+            <Box
               sx={{
-                height: "inherit",
-                borderRadius: "10px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 border: "0.5px solid #7C3AED",
-                fontFamily: "Poppins",
-                fontSize: "12px",
-                // lineHeight: "8px",
-                fontWeight: "500",
-                // color: "#7C3AED",
+
                 margin: "0 3px",
+                // backgroundColor: "#f0f0f0", // Example background color
+                // padding: "1rem", // Example padding
+                borderRadius: "8px", // Example border radius
               }}
             >
-              <LanguageIcon
-                sx={{
-                  height: "fit-content",
+              <a
+                href={`https://${resumeInfo.socialMedia.website.link}`}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  // margin: "0 3px",
+                  padding: "5px",
+                  textDecoration: "none", // Remove underline
+                  color: "inherit", // Inherit text color
                 }}
-              />
-              {resumeInfo.socialMedia.website.name}
-            </Button>
-            <Button
-              variant="text"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <LanguageIcon
+                  sx={{
+                    // marginRight: "0.5rem",
+                    fontSize: "1.3rem", // Adjust icon size as needed
+                    color: "#183b56",
+                  }}
+                />
+                <Typography
+                  variant="h2"
+                  component="h1"
+                  gutterBottom
+                  sx={{
+                    fontWeight: 600,
+                    fontFamily: "Poppins",
+                    fontSize: "0.7rem",
+                    color: "#183b56",
+                    margin: "auto",
+                  }}
+                >
+                  {resumeInfo.socialMedia.website.name}
+                </Typography>
+              </a>
+            </Box>
+            <Box
               sx={{
-                height: "inherit",
-                borderRadius: "10px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 border: "0.5px solid #7C3AED",
-                fontFamily: "Poppins",
-                fontSize: "12px",
-                // lineHeight: "8px",
-                fontWeight: "500",
-                // color: "#7C3AED",
+
                 margin: "0 3px",
+                // backgroundColor: "#f0f0f0", // Example background color
+                // padding: "1rem", // Example padding
+                borderRadius: "8px", // Example border radius
               }}
             >
-              <LinkedInIcon
-                sx={{
-                  height: "fit-content",
+              <a
+                href={`https://${resumeInfo.socialMedia.linkedin.link}`}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  // margin: "0 3px",
+                  padding: "5px",
+                  textDecoration: "none", // Remove underline
+                  color: "inherit", // Inherit text color
                 }}
-              />
-              {resumeInfo.socialMedia.linkedin.name}
-            </Button>
-            <Button
-              variant="text"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <LinkedInIcon
+                  sx={{
+                    // marginRight: "0.5rem",
+                    fontSize: "1.3rem", // Adjust icon size as needed
+                    color: "#183b56",
+                  }}
+                />
+                <Typography
+                  variant="h2"
+                  component="h1"
+                  gutterBottom
+                  sx={{
+                    fontWeight: 600,
+                    fontFamily: "Poppins",
+                    fontSize: "0.7rem",
+                    color: "#183b56",
+                    margin: "auto",
+                  }}
+                >
+                  {resumeInfo.socialMedia.linkedin.name}
+                </Typography>
+              </a>
+            </Box>
+            <Box
               sx={{
-                height: "inherit",
-                borderRadius: "10px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 border: "0.5px solid #7C3AED",
-                fontFamily: "Poppins",
-                fontSize: "12px",
-                // lineHeight: "8px",
-                fontWeight: "500",
-                // color: "#7C3AED",
+
                 margin: "0 3px",
+                // backgroundColor: "#f0f0f0", // Example background color
+                // padding: "1rem", // Example padding
+                borderRadius: "8px", // Example border radius
               }}
             >
-              <GitHubIcon
-                sx={{
-                  height: "fit-content",
+              <a
+                href={`https://${resumeInfo.socialMedia.github.link}`} // Replace with your target URL
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  // margin: "0 3px",
+                  padding: "5px",
+                  textDecoration: "none", // Remove underline
+                  color: "inherit", // Inherit text color
                 }}
-              />
-              {resumeInfo.socialMedia.github.name}
-            </Button>
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <GitHubIcon
+                  sx={{
+                    // marginRight: "0.5rem",
+                    fontSize: "1.3rem", // Adjust icon size as needed
+                    color: "#183b56",
+                  }}
+                />
+                <Typography
+                  variant="h2"
+                  component="h1"
+                  gutterBottom
+                  sx={{
+                    fontWeight: 600,
+                    fontFamily: "Poppins",
+                    fontSize: "0.7rem",
+                    color: "#183b56",
+                    margin: "auto",
+                  }}
+                >
+                  {resumeInfo.socialMedia.github.name}
+                </Typography>
+              </a>
+            </Box>
           </Box>
         </Box>
       </Box>

@@ -19,6 +19,9 @@ export const lightTheme: ThemeOptions = {
       main: '#dc004e',
     },
   },
+  customBackgroundImage: {
+    main: 'url("/light.jpeg")',
+  },
 };
 
 export const darkTheme: ThemeOptions = {

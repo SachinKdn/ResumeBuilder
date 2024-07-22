@@ -92,8 +92,20 @@ const PersonalDetail: React.FC<IProps> = ({ enabledNext }) => {
 
   return (
     <Container>
-      <Typography variant="h4" gutterBottom>
-        Personal Details
+      <Typography
+        variant="h2"
+        component="h1"
+        gutterBottom
+        sx={{
+          fontWeight: 700,
+          fontFamily: "Poppins",
+          fontSize: "1.1rem",
+          color: "#183b56",
+          margin: "1.2rem auto",
+          textAlign: "center",
+        }}
+      >
+        Add Your Personal Details
       </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
@@ -160,6 +172,7 @@ const PersonalDetail: React.FC<IProps> = ({ enabledNext }) => {
               fullWidth
               margin="normal"
               variant="outlined"
+              required
               label="Name"
               name="linkedinName"
               value={socialMedia.linkedin.name}
@@ -169,7 +182,9 @@ const PersonalDetail: React.FC<IProps> = ({ enabledNext }) => {
               fullWidth
               margin="normal"
               variant="outlined"
+              placeholder="www.linkedin.com/"
               label="Link"
+              required
               name="linkedinLink"
               value={socialMedia.linkedin.link}
               onChange={handleSocialMediaChange}
@@ -184,6 +199,7 @@ const PersonalDetail: React.FC<IProps> = ({ enabledNext }) => {
               margin="normal"
               variant="outlined"
               label="Name"
+              required
               name="githubName"
               value={socialMedia.github.name}
               onChange={handleSocialMediaChange}
@@ -193,6 +209,8 @@ const PersonalDetail: React.FC<IProps> = ({ enabledNext }) => {
               margin="normal"
               variant="outlined"
               label="Link"
+              required
+              placeholder="www.github.com/"
               name="githubLink"
               value={socialMedia.github.link}
               onChange={handleSocialMediaChange}
@@ -202,12 +220,21 @@ const PersonalDetail: React.FC<IProps> = ({ enabledNext }) => {
           {/* Website */}
           <Box>
             <Typography variant="subtitle1">Website</Typography>
+            <Typography
+              sx={{
+                fontSize: "0.7rem",
+                color: "tomato",
+              }}
+            >
+              *Any platform or portfolio link e.g. LeetCode
+            </Typography>
             <TextField
               fullWidth
               margin="normal"
               variant="outlined"
-              label="Name"
+              label="Platform Name"
               name="websiteName"
+              required
               value={socialMedia.website.name}
               onChange={handleSocialMediaChange}
             />
@@ -216,7 +243,9 @@ const PersonalDetail: React.FC<IProps> = ({ enabledNext }) => {
               margin="normal"
               variant="outlined"
               label="Link"
+              placeholder="portfolio link or any platform profile link"
               name="websiteLink"
+              required
               value={socialMedia.website.link}
               onChange={handleSocialMediaChange}
             />
@@ -226,9 +255,13 @@ const PersonalDetail: React.FC<IProps> = ({ enabledNext }) => {
           type="submit"
           variant="contained"
           color="primary"
+          size="medium"
           disabled={!enabledNext}
+          sx={{
+            margin: "5px",
+          }}
         >
-          Submit
+          Save
         </Button>
       </form>
     </Container>

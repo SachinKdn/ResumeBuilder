@@ -47,6 +47,21 @@ const SkillDetail: React.FC<IProps> = ({ enabledNext }) => {
     setSkillSections((skillSections) => skillSections.slice(0, -1));
   };
   const onSave = async () => {
+    const isValid = skillSections.every(
+      (section) =>
+        section.sectionName.trim() !== "" &&
+        section.subCategories.every(
+          (subCategory) =>
+            subCategory.categoryName.trim() !== "" &&
+            subCategory.skills.every((skill) => skill.trim() !== "")
+        )
+    );
+
+    if (!isValid) {
+      alert("Please fill out all fields before saving.");
+      return;
+    }
+
     setLoading(true);
     // setSkillSections([
     //     ...skillSections,
@@ -142,10 +157,30 @@ const SkillDetail: React.FC<IProps> = ({ enabledNext }) => {
   }, [skillSections]);
   return (
     <Box sx={{ padding: "16px" }}>
+      <Typography
+        variant="h2"
+        component="h1"
+        gutterBottom
+        sx={{
+          fontWeight: 700,
+          fontFamily: "Poppins",
+          fontSize: "1.1rem",
+          color: "#183b56",
+          margin: "0.2rem auto",
+          textAlign: "center",
+        }}
+      >
+        Add Skill Section
+      </Typography>
       {skillSections.map((section, sectionIndex) => (
         <Paper
           key={sectionIndex}
-          sx={{ padding: "16px", marginBottom: "16px" }}
+          sx={{
+            padding: "16px",
+            marginBottom: "16px",
+            backgroundColor: "transparent",
+            boxShadow: "unset",
+          }}
         >
           <TextField
             fullWidth
@@ -169,27 +204,29 @@ const SkillDetail: React.FC<IProps> = ({ enabledNext }) => {
                 }
               />
               {subCategory.skills.map((skill, skillIndex) => (
-                <TextField
-                  key={skillIndex}
-                  fullWidth
-                  margin="normal"
-                  variant="outlined"
-                  label="Skill"
-                  value={skill}
-                  onChange={(e) =>
-                    handleInputChange(
-                      e,
-                      sectionIndex,
-                      subCategoryIndex,
-                      skillIndex
-                    )
-                  }
-                />
+                <Box key={subCategoryIndex} sx={{ paddingLeft: "16px" }}>
+                  <TextField
+                    key={skillIndex}
+                    fullWidth
+                    margin="normal"
+                    variant="outlined"
+                    label="Skill"
+                    value={skill}
+                    onChange={(e) =>
+                      handleInputChange(
+                        e,
+                        sectionIndex,
+                        subCategoryIndex,
+                        skillIndex
+                      )
+                    }
+                  />
+                </Box>
               ))}
               <Button
                 variant="contained"
                 onClick={() => handleAddSkill(sectionIndex, subCategoryIndex)}
-                sx={{ marginTop: "8px" }}
+                sx={{ marginLeft: "16px", marginTop: "8px" }}
               >
                 Add Skill
               </Button>
@@ -204,22 +241,36 @@ const SkillDetail: React.FC<IProps> = ({ enabledNext }) => {
           </Button>
         </Paper>
       ))}
+      <Box
+        sx={{
+          display: "flex",
+          gap: 2,
+        }}
+      >
+        <Button variant="contained" onClick={handleAddSection}>
+          + Add Section
+        </Button>
+        {skillSections.length > 0 && (
+          <Button
+            variant="outlined"
+            onClick={RemoveSection}
+            className="text-primary"
+          >
+            {" "}
+            - Remove
+          </Button>
+        )}
+      </Box>
       <Button
         variant="contained"
-        onClick={handleAddSection}
-        sx={{ marginTop: "16px" }}
+        color="primary"
+        size="medium"
+        disabled={loading}
+        onClick={() => onSave()}
+        sx={{
+          margin: "5px",
+        }}
       >
-        Add Section
-      </Button>
-      <Button
-        variant="outlined"
-        onClick={RemoveSection}
-        className="text-primary"
-      >
-        {" "}
-        - Remove
-      </Button>
-      <Button disabled={loading} onClick={() => onSave()}>
         {loading
           ? // <LoaderCircle className='animate-spin' />
             "Wait"

@@ -60,6 +60,18 @@ const ProjectDetail: React.FC<IProps> = ({ enabledNext }) => {
     setProjectList((projectList) => projectList.slice(0, -1));
   };
   const onSave = async () => {
+    const isValid = projectList.every(
+      (project) =>
+        project.name.trim() !== "" &&
+        project.description.trim() !== "" &&
+        project.link.trim() !== "" &&
+        project.technologies.every((tech) => tech.trim() !== "")
+    );
+
+    if (!isValid) {
+      alert("Please fill out all fields before saving.");
+      return;
+    }
     setLoading(true);
     // const data = {
     //   experience: projectList.map(({ company, role, startDate, endDate,responsibilities}) => ({
@@ -110,6 +122,21 @@ const ProjectDetail: React.FC<IProps> = ({ enabledNext }) => {
   };
   return (
     <Box sx={{ padding: "16px" }}>
+      <Typography
+        variant="h2"
+        component="h1"
+        gutterBottom
+        sx={{
+          fontWeight: 700,
+          fontFamily: "Poppins",
+          fontSize: "1.1rem",
+          color: "#183b56",
+          margin: "0.2rem auto",
+          textAlign: "center",
+        }}
+      >
+        Add Project Section
+      </Typography>
       {resumeInfo &&
         projectList.map((entry, index) => (
           <Box key={index} sx={{ marginBottom: "16px" }}>
@@ -166,7 +193,12 @@ const ProjectDetail: React.FC<IProps> = ({ enabledNext }) => {
           </Box>
         ))}
       <div className="flex justify-between">
-        <div className="flex gap-2">
+        <Box
+          sx={{
+            display: "flex",
+            gap: 2,
+          }}
+        >
           <Button
             variant="outlined"
             onClick={AddNewProject}
@@ -184,8 +216,17 @@ const ProjectDetail: React.FC<IProps> = ({ enabledNext }) => {
             {" "}
             - Remove
           </Button>
-        </div>
-        <Button disabled={loading} onClick={() => onSave()}>
+        </Box>
+        <Button
+          variant="contained"
+          color="primary"
+          size="medium"
+          disabled={loading}
+          onClick={() => onSave()}
+          sx={{
+            margin: "5px",
+          }}
+        >
           {loading
             ? // <LoaderCircle className='animate-spin' />
               "Wait"

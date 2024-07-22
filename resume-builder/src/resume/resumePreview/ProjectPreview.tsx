@@ -26,7 +26,7 @@ const ProjectPreview: React.FC<IProp> = ({ resumeInfo }) => {
       <Box
         sx={{
           // marginRight:"15px"
-          width: "95px",
+          width: "115px", //95
         }}
       >
         <Typography
@@ -34,8 +34,8 @@ const ProjectPreview: React.FC<IProp> = ({ resumeInfo }) => {
           component="h4"
           sx={{
             fontFamily: "Poppins",
-            fontSize: "14px",
-            lineHeight: "12.6px",
+            fontSize: "20px", //14
+            lineHeight: "19.6px", //12.6
             fontWeight: "500",
             color: "#334155",
           }}
@@ -74,8 +74,8 @@ const ProjectPreview: React.FC<IProp> = ({ resumeInfo }) => {
                 component="h4"
                 sx={{
                   fontFamily: "Poppins",
-                  fontSize: "13px",
-                  lineHeight: "12.6px",
+                  fontSize: "19px", //13
+                  lineHeight: "19.6px", //12.6
                   fontWeight: "500",
                   color: "#334155",
 
@@ -98,8 +98,8 @@ const ProjectPreview: React.FC<IProp> = ({ resumeInfo }) => {
                     component="h4"
                     sx={{
                       fontFamily: "Poppins",
-                      fontSize: "11px",
-                      lineHeight: "12.6px",
+                      fontSize: "17px", //11
+                      lineHeight: "19.6px", //12.6
                       fontWeight: "500",
                       color: "#334155",
                     }}
@@ -113,8 +113,8 @@ const ProjectPreview: React.FC<IProp> = ({ resumeInfo }) => {
                 component="h4"
                 sx={{
                   fontFamily: "Poppins",
-                  fontSize: "11px",
-                  lineHeight: "12.6px",
+                  fontSize: "15px", //10
+                  lineHeight: "19.6px", //12.6
                   fontWeight: "500",
                   color: "#334155",
                 }}

@@ -17,10 +17,15 @@ const FormSection = () => {
       sx={{
         border: "1ps solid black",
         // height: "25px",
-        // width: "100%",
+        width: {
+          xs: "100%",
+          md: "40vw",
+        },
         // flexGrow:"1",
-        flex: "1",
-        backgroundColor: "bisque",
+        // flex: "1",
+        backgroundColor: "#f8f8f8",
+        backgroundSize: "contain",
+        backgroundImage: 'url("/bgImg.png") !important',
       }}
     >
       <Box
@@ -40,7 +45,7 @@ const FormSection = () => {
             gap: "5",
           }}
         >
-          <Link to="/dashboard">
+          <Link to="/">
             <Button variant="outlined" size="small">
               HOME
             </Button>

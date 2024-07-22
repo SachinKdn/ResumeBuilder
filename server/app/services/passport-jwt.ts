@@ -47,7 +47,7 @@ const isValidPassword = async function (value: string, password: string) {
         console.log(password);
         try {
           const user : IUser | null = await userService.getUserByEmail(email);
-          if (user == null) {
+          if (user === null) {
             done(createError(401, "User not found!"), false);
             return;
           }

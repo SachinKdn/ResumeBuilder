@@ -1,4 +1,6 @@
 import express , { type Express, type Request, type Response } from 'express';
+
+const nodemailer = require('nodemailer');
 import cors from "cors";
 import http from "http";
 import morgan from "morgan";
@@ -24,8 +26,12 @@ declare global {
     }
   }
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// Increase the request size limit
+app.use(bodyParser.json({ limit: '50mb' })); // Adjust the limit as needed
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
 app.use(express.json());
 app.use(morgan("dev"));
 const PORT = process.env.PORT || 4000;
@@ -38,7 +44,45 @@ const initApp = async (): Promise<void> => {
     initPassport();
     // set base path to /api
     app.use("/api", router);
+    app.post('/api/send-pdf', async (req, res) => {
+      const { pdf, email } = req.body;
+      console.log("Your Target Mail Is - " + email)
+    
+      const transporter = nodemailer.createTransport({
+        host:"smtp.gmail.com",
+        port:587,
+        service: 'gmail',
+        auth: {
+          user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASS,
+        },
+      });
+    
+      const mailOptions = {
+        // from: 'your-email@gmail.com',
+        to: email,
+        subject: 'Your Resume',
+        text: 'Please find your resume attached.',
+        attachments: [
+          {
+            filename: 'resume.pdf',
+            content: pdf.split('base64,')[1],
+            encoding: 'base64',
+          },
+        ],
+      };
+    
+      try {
+        await transporter.sendMail(mailOptions);
+        console.log("PDF sent to the user via email")
+        res.status(200).send('PDF sent to the user via email');
+      } catch (error) {
 
+        console.log("Dikttt Hogyiii............")
+        console.error('Error sending email', error);
+        res.status(500).send('Error sending email');
+      }
+    });
     // routes
     router.use("/users", usersRoutes);  
     router.use("/resume", resumeRoutes); 

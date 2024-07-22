@@ -12,7 +12,7 @@ import SkillPreview from "./resumePreview/SkillPreview";
 import { useParams } from "react-router-dom";
 const ResumePreview = () => {
   const theme = useTheme();
-
+  console.log(theme);
   const { resumeId } = useParams();
   const { resumeInfo, setResumeInfo, fetchResume } = useApi();
   console.log(resumeInfo);
@@ -39,19 +39,29 @@ const ResumePreview = () => {
       sx={{
         // width: "595px",
         height: "842px",
+        flex: 1,
         // border: "1px solid grey",
         margin: "0",
+        // backgroundImage: theme.customBackgroundImage.main,
         backgroundImage: 'url("/light.jpeg") !important',
         backgroundRepeat: "no-repeat",
-        // backgroundColor: "yellowgreen",
         display: "flex",
         flexDirection: "column",
-        backgroundColor: "white",
+        backgroundColor: theme.palette.background.default,
+        // backgroundColor: "white",
         "@media print": {
           backgroundImage: 'url("/light.jpeg")',
           WebkitPrintColorAdjust: "exact",
           printColorAdjust: "exact",
           backgroundColor: "white",
+        },
+        overflowX: {
+          xs: "auto",
+          md: "unset",
+        },
+        overflowY: {
+          xs: "auto",
+          md: "unset",
         },
       }}
     >
@@ -61,7 +71,7 @@ const ResumePreview = () => {
           width: "595px",
           height: "160px",
           padding: "15px",
-          borderBottom: "0.5px solid #d8d8d8",
+          // borderBottom: "0.5px solid #d8d8d8",
           margin: "40px auto",
 
           // backgroundImage: 'url("/light.jpeg")',
