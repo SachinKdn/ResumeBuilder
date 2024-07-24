@@ -47,7 +47,7 @@ const ViewResume = () => {
         const base64data = reader.result;
 
         // Send the Base64 PDF to the server
-        const response = await fetch("http://localhost:4000/api/send-pdf", {
+        const response = await fetch("http://localhost:4000/api/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

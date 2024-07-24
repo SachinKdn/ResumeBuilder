@@ -3,6 +3,9 @@ import { useApi } from "../../context/ApiContext";
 import { useParams } from "react-router-dom";
 import { IProps } from "../EditResume";
 import { TextField, Button, Container, Typography, Box } from "@mui/material";
+
+import "react-toastify/dist/ReactToastify.css";
+import { Slide, toast } from "react-toastify";
 interface SocialMedia {
   linkedin: { name: string; link: string };
   github: { name: string; link: string };
@@ -83,7 +86,17 @@ const PersonalDetail: React.FC<IProps> = ({ enabledNext }) => {
         const newResume = await updateResume(resumeId, resumeInfo);
         setResumeInfo(newResume);
       }
-
+      toast.success("Details saved successfully!!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+      });
       enabledNext(true);
     } catch (err) {
       console.log(err);
@@ -175,7 +188,7 @@ const PersonalDetail: React.FC<IProps> = ({ enabledNext }) => {
               required
               label="Name"
               name="linkedinName"
-              value={socialMedia.linkedin.name}
+              value={resumeInfo.socialMedia.linkedin.name}
               onChange={handleSocialMediaChange}
             />
             <TextField
@@ -186,7 +199,7 @@ const PersonalDetail: React.FC<IProps> = ({ enabledNext }) => {
               label="Link"
               required
               name="linkedinLink"
-              value={socialMedia.linkedin.link}
+              value={resumeInfo.socialMedia.linkedin.link}
               onChange={handleSocialMediaChange}
             />
           </Box>
@@ -201,7 +214,7 @@ const PersonalDetail: React.FC<IProps> = ({ enabledNext }) => {
               label="Name"
               required
               name="githubName"
-              value={socialMedia.github.name}
+              value={resumeInfo.socialMedia.github.name}
               onChange={handleSocialMediaChange}
             />
             <TextField
@@ -212,7 +225,7 @@ const PersonalDetail: React.FC<IProps> = ({ enabledNext }) => {
               required
               placeholder="www.github.com/"
               name="githubLink"
-              value={socialMedia.github.link}
+              value={resumeInfo.socialMedia.github.link}
               onChange={handleSocialMediaChange}
             />
           </Box>
@@ -235,7 +248,7 @@ const PersonalDetail: React.FC<IProps> = ({ enabledNext }) => {
               label="Platform Name"
               name="websiteName"
               required
-              value={socialMedia.website.name}
+              value={resumeInfo.socialMedia.website.name}
               onChange={handleSocialMediaChange}
             />
             <TextField
@@ -246,7 +259,7 @@ const PersonalDetail: React.FC<IProps> = ({ enabledNext }) => {
               placeholder="portfolio link or any platform profile link"
               name="websiteLink"
               required
-              value={socialMedia.website.link}
+              value={resumeInfo.socialMedia.website.link}
               onChange={handleSocialMediaChange}
             />
           </Box>

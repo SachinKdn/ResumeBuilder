@@ -1,6 +1,6 @@
 import { Box, Container, Paper, Typography } from "@mui/material";
 import React, { useEffect } from "react";
-import { ThemeContextProvider } from "../theme/ThemeContext";
+import { ThemeContextProvider, useThemeContext } from "../theme/ThemeContext";
 import { useTheme } from "@mui/material/styles";
 import ThemeToggleButton from "../theme/ThemeToggleButton";
 import PersonalDetailPreview from "./resumePreview/PersonalDetailPreview";
@@ -12,6 +12,7 @@ import SkillPreview from "./resumePreview/SkillPreview";
 import { useParams } from "react-router-dom";
 const ResumePreview = () => {
   const theme = useTheme();
+  const { toggleTheme } = useThemeContext();
   console.log(theme);
   const { resumeId } = useParams();
   const { resumeInfo, setResumeInfo, fetchResume } = useApi();
@@ -26,6 +27,12 @@ const ResumePreview = () => {
           }
           const data = await fetchResume(resumeId);
           console.log("Fetched resume:", data);
+          if (data.isLightTheme) {
+            console.log("toggleTheme called bcz light=false.");
+            toggleTheme(true);
+          } else {
+            toggleTheme(false);
+          }
         } catch (error) {
           console.error("Fetch resume error:", error);
         }
@@ -33,6 +40,10 @@ const ResumePreview = () => {
     };
     getResume();
   }, []);
+  if (!theme.customBackgroundImage) {
+    console.log("customBackgroundImage is not there.");
+    return null; // or handle the error as appropriate
+  }
   return (
     <Box
       id="print-area" //main page of resume
@@ -42,12 +53,15 @@ const ResumePreview = () => {
         flex: 1,
         // border: "1px solid grey",
         margin: "0",
-        // backgroundImage: theme.customBackgroundImage.main,
-        backgroundImage: 'url("/light.jpeg") !important',
+        backgroundImage: theme.customBackgroundImage.main,
+        // backgroundImage: 'url("/light.jpeg") !important',
         backgroundRepeat: "no-repeat",
         display: "flex",
         flexDirection: "column",
         backgroundColor: theme.palette.background.default,
+        // background: resumeInfo.isLightTheme
+        //   ? "white"
+        //   : "linear-gradient(180deg, rgba(108,108,117,1) 0%, rgba(255,255,255,1) 100%)",
         // backgroundColor: "white",
         "@media print": {
           backgroundImage: 'url("/light.jpeg")',
@@ -81,11 +95,16 @@ const ResumePreview = () => {
       </Box>
       <Box
         sx={{
+          // linear-gradient(180deg, rgba(108,108,117,1) 0%, rgba(182,182,182,1) 25%, rgba(255,255,255,1) 100%)
+          // background: resumeInfo.isLightTheme
+          //   ? ""
+          //   : "linear-gradient(180deg, rgba(108,108,117,1) 0%, rgba(255,255,255,1) 100%)",
           padding: "5% 3%",
           display: "flex",
           flexDirection: "column",
           gap: 2,
         }}
+        className="addLinear"
       >
         {resumeInfo?.education?.length > 0 && (
           <EducationalPreview resumeInfo={resumeInfo} />

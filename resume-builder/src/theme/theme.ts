@@ -20,7 +20,7 @@ export const lightTheme: ThemeOptions = {
     },
   },
   customBackgroundImage: {
-    main: 'url("/light.jpeg")',
+    main: 'url(/light.jpeg)',
   },
 };
 
@@ -28,7 +28,8 @@ export const darkTheme: ThemeOptions = {
   palette: {
     mode: 'dark',
     background: {
-      default: '#303030',
+      default:"black",
+      // default: "linear-gradient(180deg, rgba(108,108,117,1) 0%, rgba(182,182,182,1) 25%, rgba(255,255,255,1) 100%)",
       paper: '#424242',
     },
     text: {
@@ -42,4 +43,8 @@ export const darkTheme: ThemeOptions = {
       main: '#f48fb1',
     },
   },
+  customBackgroundImage: {
+    main: 'url(/dark.jpeg)',
+  },
+  
 };

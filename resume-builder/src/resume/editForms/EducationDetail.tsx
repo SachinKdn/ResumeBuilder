@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { IProps } from "../EditResume";
 import { TextField, Button, Container, Typography, Box } from "@mui/material";
 
+import "react-toastify/dist/ReactToastify.css";
+import { Slide, toast } from "react-toastify";
 const formatDate = (dateString: string): string => {
   const date = new Date(dateString);
   const year = date.getFullYear();
@@ -51,6 +53,7 @@ const EducationDetail: React.FC<IProps> = ({ enabledNext }) => {
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     index: number
   ) => {
+    enabledNext(false);
     const newEntries = educationalList.slice();
     const { name, value } = event.target;
     newEntries[index] = { ...newEntries[index], [name]: value };
@@ -99,6 +102,17 @@ const EducationDetail: React.FC<IProps> = ({ enabledNext }) => {
       if (resumeId) {
         const newResume = await updateResume(resumeId, resumeInfo);
         console.log(newResume);
+        toast.success("Details saved successfully!!", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Slide,
+        });
         // setResumeInfo(newResume);
       }
 

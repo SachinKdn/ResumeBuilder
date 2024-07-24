@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { IProps } from "../EditResume";
 import { TextField, Button, Container, Typography, Box } from "@mui/material";
 
+import "react-toastify/dist/ReactToastify.css";
+import { Slide, toast } from "react-toastify";
 const ProjectDetail: React.FC<IProps> = ({ enabledNext }) => {
   const { resumeId } = useParams();
   const { resumeInfo, updateResume, setResumeInfo } = useApi();
@@ -98,6 +100,17 @@ const ProjectDetail: React.FC<IProps> = ({ enabledNext }) => {
       }
 
       console.log("Try ended");
+      toast.success("Details saved successfully!!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+      });
       enabledNext(true);
     } catch (err) {
       console.log(err);

@@ -3,6 +3,8 @@ import { useApi } from "../../context/ApiContext";
 import { useParams } from "react-router-dom";
 import { IProps } from "../EditResume";
 import { TextField, Button, Container, Typography, Box } from "@mui/material";
+import "react-toastify/dist/ReactToastify.css";
+import { Slide, toast } from "react-toastify";
 const formatDate = (dateString: string): string => {
   const date = new Date(dateString);
   const year = date.getFullYear();
@@ -119,7 +121,17 @@ const ExperienceDetail: React.FC<IProps> = ({ enabledNext }) => {
         console.log(newResume);
         // setResumeInfo(newResume);
       }
-
+      toast.success("Details saved successfully!!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+      });
       console.log("Try ended");
       enabledNext(true);
     } catch (err) {

@@ -1,4 +1,6 @@
 import React, { useEffect, useState, ChangeEvent } from "react";
+import "react-toastify/dist/ReactToastify.css";
+import { Slide, toast } from "react-toastify";
 import { useApi } from "../../context/ApiContext";
 import { useParams } from "react-router-dom";
 import { IProps } from "../EditResume";
@@ -88,6 +90,17 @@ const SkillDetail: React.FC<IProps> = ({ enabledNext }) => {
         console.log(resumeInfo);
         const newResume = await updateResume(resumeId, resumeInfo);
         console.log(newResume);
+        toast.success("Details saved successfully!!", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Slide,
+        });
         // setResumeInfo(newResume);
       }
 
